@@ -1,0 +1,42 @@
+-- SCRIPT 2: INSERT DATA
+
+-- Insert Countries
+INSERT INTO dim_country (iso3, country_name, who_region) VALUES
+('USA', 'United States', 'AMRO'),
+('IND', 'India', 'SEARO'),
+('NGA', 'Nigeria', 'AFRO'),
+('BRA', 'Brazil', 'AMRO');
+
+-- Insert Vaccines
+INSERT INTO dim_vaccine (antigen_code, antigen_name) VALUES
+('DTP3', 'DTP3 Vaccine'),
+('MCV1', 'Measles First Dose'),
+('POL3', 'Polio Third Dose');
+
+-- Insert Diseases
+INSERT INTO dim_disease (disease_code, disease_name) VALUES
+('PERTUSSIS', 'Whooping Cough'),
+('MEASLES', 'Measles'),
+('POLIO', 'Poliomyelitis');
+
+-- Insert Dates
+INSERT INTO dim_date (year) VALUES (2020), (2021), (2022);
+
+-- Insert Sample Coverage Data
+INSERT INTO fact_coverage (country_id, date_id, vaccine_id, coverage_pct) VALUES
+(1, 2, 1, 95), -- USA, 2021, DTP3
+(2, 2, 1, 88), -- India, 2021, DTP3
+(3, 2, 2, 76), -- Nigeria, 2021, Measles
+(4, 3, 3, 91), -- Brazil, 2022, Polio
+(2, 3, 2, 92); -- India, 2022, Measles
+
+-- Insert Sample Disease Cases
+INSERT INTO fact_incidence (country_id, date_id, disease_id, cases) VALUES
+(2, 2, 2, 14500), -- India, 2021, Measles
+(3, 2, 2, 32000), -- Nigeria, 2021, Measles
+(3, 3, 3, 12),    -- Nigeria, 2022, Polio
+(2, 3, 2, 8700);  -- India, 2022, Measles
+
+-- Insert Sample Vaccine Introduction Data
+INSERT INTO fact_intro (country_id, vaccine_id, intro_date) VALUES
+(2, 2, '1985-01-01'); -- India, Measles
