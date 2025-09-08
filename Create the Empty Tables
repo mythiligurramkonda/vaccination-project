@@ -1,0 +1,49 @@
+-- SCRIPT 1: CREATE TABLES
+DROP TABLE IF EXISTS fact_coverage, fact_incidence, fact_intro, dim_country, dim_date, dim_vaccine, dim_disease CASCADE;
+
+CREATE TABLE dim_country (
+    country_id SERIAL PRIMARY KEY,
+    iso3 CHAR(3) UNIQUE,
+    country_name TEXT,
+    who_region TEXT
+);
+
+CREATE TABLE dim_vaccine (
+    vaccine_id SERIAL PRIMARY KEY,
+    antigen_code TEXT UNIQUE,
+    antigen_name TEXT
+);
+
+CREATE TABLE dim_disease (
+    disease_id SERIAL PRIMARY KEY,
+    disease_code TEXT UNIQUE,
+    disease_name TEXT
+);
+
+CREATE TABLE dim_date (
+    date_id SERIAL PRIMARY KEY,
+    year INT UNIQUE NOT NULL
+);
+
+CREATE TABLE fact_coverage (
+    fact_id BIGSERIAL PRIMARY KEY,
+    country_id INT,
+    date_id INT,
+    vaccine_id INT,
+    coverage_pct NUMERIC(5, 2)
+);
+
+CREATE TABLE fact_incidence (
+    fact_id BIGSERIAL PRIMARY KEY,
+    country_id INT,
+    date_id INT,
+    disease_id INT,
+    cases INT
+);
+
+CREATE TABLE fact_intro (
+    fact_id BIGSERIAL PRIMARY KEY,
+    country_id INT,
+    vaccine_id INT,
+    intro_date DATE
+);
